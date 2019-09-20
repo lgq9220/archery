@@ -1,5 +1,270 @@
 {% extends "base.html" %}
 
-{% block content %}
-    {{ chart|safe }}
-{% endblock content %}
+{% block section %}
+    <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{ count_stats.sql_wf_cnt }}</h3>
+                        <p>SQL上线工单</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-upload"></i>
+                    </div>
+                    <a href="/sqlworkflow/" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{ count_stats.query_wf_cnt }}</h3>
+                        <p>SQL查询工单</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-search"></i>
+                    </div>
+                    <a href="/queryapplylist/" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{ count_stats.user_cnt }}</h3>
+                        <p>平台用户</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="/admin/sql/users/" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>{{ count_stats.ins_cnt }}</h3>
+                        <p>实例数量</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="/instance/" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-7">
+                <!-- Chart -->
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">SQL查询统计</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chart">
+                                    {{ chart.line1|safe }}
+                                </div>
+                                <!-- /.chart-responsive -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-5">
+                <!-- Chart -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">SQL上线统计</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chart">
+                                    {{ chart.pie1|safe }}
+                                </div>
+                                <!-- /.chart-responsive -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- right col -->
+        </div>
+        <!-- /.row -->
+        <!-- /.row (main row) -->
+
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Chart -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">SQL上线数量</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chart">
+                                    {{ chart.bar1|safe }}
+                                </div>
+                                <!-- /.chart-responsive -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-4">
+                <!-- Chart -->
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">DB检索行数</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chart">
+                                    {{ chart.pie5|safe }}
+                                </div>
+                                <!-- /.chart-responsive -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <div class="col-md-8">
+                <!-- Chart -->
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">SQL上线用户</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chart">
+                                    {{ chart.bar2|safe }}
+                                </div>
+                                <!-- /.chart-responsive -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-md-4">
+                <!-- MAP & BOX PANE -->
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">SQL查询用户</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chart">
+                                    {{ chart.pie4|safe }}
+                                </div>
+                                <!-- /.chart-responsive -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock section %}

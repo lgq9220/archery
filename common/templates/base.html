@@ -1,268 +1,431 @@
+<!--
+AdminLTE
+
+The MIT License (MIT)
+
+Copyright (c) 2014-2017 Abdullah Almsaeed
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+{% load staticfiles %}
 <!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <html>
 <head>
-    {% load staticfiles %}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <title>Archery-SQL审核查询平台</title>
-
-    <!-- 引入 Bootstrap -->
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'metisMenu/css/metisMenu.min.css' %}" rel="stylesheet">
-    <link href="{% static 'sb-admin-2/css/sb-admin-2.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- Theme style -->
+    <link href="{% static 'adminlte/css/AdminLTE.min.css' %}" rel="stylesheet">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link href="{% static 'adminlte/css/skins/_all-skins.min.css' %}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <!-- bootstrap-select -->
     <link href="{% static 'bootstrap-select/css/bootstrap-select.min.css' %}" rel="stylesheet">
     <link href="{% static 'bootstrap-table/css/bootstrap-table.min.css' %}" rel="stylesheet">
     <!-- django i18n -->
     <script type="text/javascript" src="{% url 'sql:javascript-catalog' %}"></script>
 </head>
-<body>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue-light sidebar-mini">
+<div class="wrapper">
 
-<div id="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <!-- Logo -->
+        <a href="/index/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>A</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Archery</b></span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/index/"><strong>Archery</strong></a>
-        </div>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Notifications Menu -->
+                    <li>
+                        <!-- Menu toggle button -->
+                        <a href="/workflow/">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">{{ todo }}</span>
+                        </a>
+                    </li>
 
-        <!-- /.navbar-header -->
-        <ul class="nav navbar-top-links navbar-right">
-            <li>
-                <a>你好，{{ user }}</a>
-            </li>
-            {% if todo > 0 %}
-                <li>
-                    <a href="/workflow/">
-                        <span class="fa fa-bell ">{{ todo }}</span>
-                    </a>
-                </li>
-            {% else %}
-                <li>
-                    <a href="/workflow/">
-                        <span class="fa fa-bell "></span>
-                    </a>
-                </li>
-            {% endif %}
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="/admin/password_change/"><i class="fa fa-user fa-fw"></i> 修改密码</a></li>
-                    <li><a href="/logout/"><i class="fa fa-gear fa-fw"></i> 退出</a></li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-            <li>
-                <a href="https://github.com/hhyo/Archery" target="_blank">
-                    <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-                </a>
-            </li>
-        </ul>
-        <!-- /.navbar-top-links -->
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="{% static 'adminlte/img/avatar.png' %}" class="user-image"
+                                 alt="User Image">
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">{{ user }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="{% static 'adminlte/img/avatar.png' %}" class="img-circle"
+                                     alt="User Image">
 
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    {% if perms.sql.menu_dashboard %}
-                        <li>
-                            <a href="/dashboard/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                    {% endif %}
-                    {% if perms.sql.menu_sqlcheck %}
-                        <li>
-                            <a href="#"><i class="fa fa-check fa-fw"></i> SQL审核<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                {% if perms.sql.menu_sqlworkflow %}
-                                    <li>
-                                        <a href="/sqlworkflow/">SQL上线</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.sql.menu_sqlanalyze %}
-                                    <li>
-                                        <a href="/sqlanalyze/">SQL分析</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    {% endif %}
-                    {% if perms.sql.menu_query %}
-                        <li>
-                            <a href="#"><i class="fa fa-search fa-fw"></i> SQL查询<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                {% if perms.sql.menu_sqlquery %}
-                                    <li>
-                                        <a href="/sqlquery/">在线查询</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.sql.menu_data_dictionary %}
-                                    <li>
-                                        <a href="/data_dictionary/">数据字典</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.sql.menu_queryapplylist %}
-                                    <li>
-                                        <a href="/queryapplylist/">权限管理</a>
-                                    </li>
-                                {% endif %}
-
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    {% endif %}
-                    {% if perms.sql.menu_sqloptimize %}
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> SQL优化<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                {% if perms.sql.menu_sqladvisor %}
-                                    <li>
-                                        <a href="/sqladvisor/">优化工具</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.sql.menu_slowquery %}
-                                    <li>
-                                        <a href="/slowquery/">慢查日志</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    {% endif %}
-                    {% if perms.sql.menu_instance %}
-                        <li>
-                            <a href="#"><i class="fa fa-database fa-fw"></i> 实例管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                {% if perms.sql.menu_instance_list %}
-                                    <li>
-                                        <a href="/instance/">实例列表</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.sql.menu_dbdiagnostic %}
-                                    <li>
-                                        <a href="/dbdiagnostic/">会话管理</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.sql.menu_database %}
-                                    <li>
-                                        <a href="/database/">数据库管理</a>
-                                    </li>
-                                {% endif %}
-
-                                {% if perms.sql.menu_instance_account %}
-                                    <li>
-                                        <a href="/instanceaccount/">账号管理</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.sql.menu_param %}
-                                    <li>
-                                        <a href="/instanceparam/">参数配置</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    {% endif %}
-                    {% if perms.sql.menu_tools %}
-                        <li>
-                            <a href="#"><i class="fa fa-plug fa-fw"></i> 小工具<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                {% if perms.sql.menu_binlog2sql %}
-                                    <li>
-                                        <a href="/binlog2sql/">Binlog2SQL</a>
-                                    </li>
-                                {% endif %}
-                                {% if perms.sql.menu_schemasync %}
-                                    <li>
-                                        <a href="/schemasync/">SchemaSync</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    {% endif %}
-                    {% if perms.sql.menu_system %}
-                        <li>
-                            <a href="#"><i class="fa fa-cogs fa-fw"></i> 系统管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/config/">配置项管理</a>
-                                </li>
-                                <li>
-                                    <a href="/group/">资源组管理</a>
-                                </li>
-                                <li>
-                                    <a href="#">其他配置管理 <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level collapse">
-                                        <li>
-                                            <a target="_blank" href="/admin/sql/users/">用户管理</a>
-                                        </li>
-                                        <li>
-                                            <a target="_blank" href="/admin/auth/group/">权限组管理</a>
-                                        </li>
-                                        <li>
-                                            <a target="_blank" href="/admin/">全部后台数据</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    {% endif %}
-                    {% if perms.sql.menu_document %}
-                        <li>
-                            <a href="/dbaprinciples/"><i class="fa fa-sitemap fa-fw"></i> 相关文档</a>
-                        </li>
-                    {% endif %}
+                                <p>
+                                    {{ user }}- {{ user.email }}
+                                    <small>{{ user.date_joined }}</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="/admin/password_change/" class="btn btn-default btn-flat">修改密码</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/logout/" class="btn btn-default btn-flat">退出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
+                    <!-- Github -->
+                    <li>
+                        <a href="https://github.com/hhyo/Archery" target="_blank">
+                            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
-    </nav>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="clearfix">
-            <br>
-            {% block content %}
-            {% endblock content %}
-            <!--底部部分 -->
-            <footer class="text-center">
-                <hr>
-                <p><strong>&copy; Archery</strong>&nbsp;(v{{ archery_version }})</p>
-            </footer>
-        </div>
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{% static 'adminlte/img/avatar.png' %}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{ user }}</p>
+                    <!-- Email -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> {{ user.email }}</a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">主导航</li>
+                {% if perms.sql.menu_dashboard %}
+                    <li class="active">
+                        <a href="/dashboard/">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if perms.sql.menu_sqlcheck %}
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-check"></i>
+                            <span>SQL审核</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            {% if perms.sql.menu_sqlworkflow %}
+                                <li><a href="/sqlworkflow/"><i class="fa fa-circle-o"></i> SQL上线</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_sqlanalyze %}
+                                <li><a href="/sqlanalyze/"><i class="fa fa-circle-o"></i> SQL分析</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if perms.sql.menu_query %}
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-search"></i>
+                            <span>SQL查询</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            {% if perms.sql.menu_sqlquery %}
+                                <li><a href="/sqlquery/"><i class="fa fa-circle-o"></i> 在线查询</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_data_dictionary %}
+                                <li><a href="/data_dictionary/"><i class="fa fa-circle-o"></i> 数据字典</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_queryapplylist %}
+                                <li><a href="/queryapplylist/"><i class="fa fa-circle-o"></i> 权限管理</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if perms.sql.menu_sqloptimize %}
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-wrench"></i>
+                            <span>SQL优化</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            {% if perms.sql.menu_sqladvisor %}
+                                <li><a href="/sqladvisor/"><i class="fa fa-circle-o"></i> 优化工具</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_slowquery %}
+                                <li><a href="/slowquery/"><i class="fa fa-circle-o"></i> 慢查日志</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if perms.sql.menu_instance %}
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-database"></i> <span>实例管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            {% if perms.sql.menu_instance_list %}
+                                <li><a href="/instance/"><i class="fa fa-circle-o"></i> 实例列表</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_dbdiagnostic %}
+                                <li><a href="/dbdiagnostic/"><i class="fa fa-circle-o"></i> 会话管理</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_database %}
+                                <li><a href="/database/"><i class="fa fa-circle-o"></i> 数据库管理</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_instance_account %}
+                                <li><a href="/instanceaccount/"><i class="fa fa-circle-o"></i> 账号管理</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_param %}
+                                <li><a href="/instanceparam/"><i class="fa fa-circle-o"></i> 参数配置</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if perms.sql.menu_tools %}
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-plug"></i> <span>小工具</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu">
+                            {% if perms.sql.menu_binlog2sql %}
+                                <li><a href="/binlog2sql/"><i class="fa fa-circle-o"></i> Binlog2SQL</a></li>
+                            {% endif %}
+                            {% if perms.sql.menu_schemasync %}
+                                <li><a href="/schemasync/"><i class="fa fa-circle-o"></i> SchemaSync</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if perms.sql.menu_system %}
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cogs"></i> <span>系统管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/config/"><i class="fa fa-circle-o"></i> 配置项管理</a></li>
+                            <li><a href="/group/"><i class="fa fa-circle-o"></i> 资源组管理</a></li>
+
+                            <li class="treeview">
+                                <a href="/config/"><i class="fa fa-circle-o"></i> 其他配置管理
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a target="_blank" href="/admin/sql/users/"><i class="fa fa-circle-o"></i> 用户管理</a>
+                                    </li>
+                                    <li><a target="_blank" href="/admin/auth/group/"><i class="fa fa-circle-o"></i>
+                                        权限组管理</a></li>
+                                    <li><a target="_blank" href="/admin/"><i class="fa fa-circle-o"></i> 全部后台数据</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if perms.sql.menu_document %}
+                    <li>
+                        <a href="/dbaprinciples/">
+                            <i class="fa fa-sitemap"></i> <span>相关文档</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+        {#        <!-- Content Header (Page header)-->#}
+        {#        <section class="content-header">#}
+        {#            {% block page_header %}#}
+        {#                <h1>#}
+        {#                    Page Header#}
+        {#                    <small>Optional description</small>#}
+        {#                </h1>#}
+        {#            {% endblock page_header %}#}
+        {#            <ol class="breadcrumb">#}
+        {#                {% block breadcrumb %}#}
+        {#                    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>#}
+        {#                    <li class="active">Here</li>#}
+        {#                {% endblock breadcrumb %}#}
+        {#            </ol>#}
+        {#        </section>#}
+
+        <!-- Main content -->
+        {% block section %}
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box box-success">
+                            <div class="box-body">
+                                {% block content %}
+                                {% endblock content %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock section %}
+        <!-- /.content -->
     </div>
-    <!-- /#page-wrapper -->
+    <!-- /.content-wrapper -->
 
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            Version v{{ archery_version }}
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2019 <a href="https://github.com/hhyo/Archery" target="_blank">Archery</a>.</strong>
+        All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark" style="display: none;">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane" id="control-sidebar-home-tab">
+            </div>
+            <!-- /.tab-pane -->
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
 </div>
+<!-- ./wrapper -->
 
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery  -->
 <script src="{% static 'jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap  -->
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'metisMenu/js/metisMenu.min.js' %}"></script>
-<script src="{% static 'sb-admin-2/js/sb-admin-2.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'adminlte/js/adminlte.min.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'adminlte/js/demo.js' %}"></script>
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
+
+<!-- Other -->
 <script src="{% static 'bootstrap-select/js/bootstrap-select.min.js' %}"></script>
 <script src="{% static 'bootstrap-select/js/i18n/defaults-zh_CN.min.js' %}"></script>
 <script src="{% static 'bootstrap-table/js/bootstrap-table.min.js' %}"></script>
 <script src="{% static 'bootstrap-table/js/bootstrap-table-zh-CN.min.js' %}"></script>
 <script src="{% static 'sql-formatter/sql-formatter.min.js' %}"></script>
 <script src="{% static 'dist/js/formatter.js' %}"></script>
-
-</body>
 <script>
     <!-- 解决CSRF-->
     $(function () {
@@ -308,4 +471,5 @@
 </script>
 {% block js %}
 {% endblock %}
+</body>
 </html>
