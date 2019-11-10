@@ -1,7 +1,6 @@
 <div align="center">
 
 # <a href="http://139.199.0.191/" target="_blank" rel="noopener noreferrer">Archery</a> 
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/94e8587e507f4565a1ea5ea21fd94c32)](https://app.codacy.com/app/hhyo/Archery?utm_source=github.com&utm_medium=referral&utm_content=hhyo/Archery&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/hhyo/Archery.svg?branch=master)](https://travis-ci.org/hhyo/Archery)
 [![Release](https://img.shields.io/github/release/hhyo/archery.svg)](https://gitee.com/rtttte/Archery/releases)
@@ -12,6 +11,8 @@
 [![HitCount](http://hits.dwyl.io/hhyo/hhyo/Archery.svg)](http://hits.dwyl.io/hhyo/hhyo/Archery)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://gitee.com/rtttte/Archery/blob/master/LICENSE)
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+![](https://images.gitee.com/uploads/images/2019/1110/202317_32bd4a1c_1038040.png)
+
 
 [文档](https://gitee.com/rtttte/Archery/wikis/Home) | [FAQ](https://gitee.com/rtttte/Archery/wikis/FAQ?sort_id=1525909) | [Releases](https://gitee.com/rtttte/Archery/releases)
 
@@ -80,7 +81,7 @@ python manage.py test -v 3
 
 贡献者
 ===============
-[![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/0)]()[![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/1)]()[![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/2)]()[![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/3)]()[![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/4)]()[![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/5)]()[![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/6)]()[![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/7)]()
+![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/0)![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/1)![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/2)![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/3)![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/4)![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/5)![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/6)![](https://sourcerer.io/fame/hhyo/hhyo/archery/images/7)
 
 贡献代码
 ===============
