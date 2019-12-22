@@ -16,8 +16,6 @@
 
 [文档](https://gitee.com/rtttte/Archery/wikis/Home) | [FAQ](https://gitee.com/rtttte/Archery/wikis/FAQ?sort_id=1525909) | [Releases](https://gitee.com/rtttte/Archery/releases)
 
-![](https://images.gitee.com/uploads/images/2019/1110/202317_32bd4a1c_1038040.png)
-
 </div>
 
 
