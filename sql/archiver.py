@@ -111,7 +111,7 @@ def archive_apply(request):
     dest_table_name = request.POST.get('dest_table_name')
     condition = request.POST.get('condition')
     no_delete = True if request.POST.get('no_delete') == 'true' else False
-    sleep = request.POST.get('sleep', 0)
+    sleep = request.POST.get('sleep') or 0
     result = {'status': 0, 'msg': 'ok', 'data': {}}
 
     # 参数校验
@@ -297,7 +297,7 @@ def archive(archive_id):
         args['dest'] = dest
         args['bulk-insert'] = True
         if no_delete:
-            args['no-delete'] = no_delete
+            args['no-delete'] = True
         else:
             args['bulk-delete'] = True
     elif mode == 'file':
@@ -305,11 +305,11 @@ def archive(archive_id):
         os.makedirs(output_directory, exist_ok=True)
         args['file'] = f'{output_directory}/{s_ins.instance_name}-{src_db_name}-{src_table_name}.txt'
         if no_delete:
-            args['no-delete'] = no_delete
+            args['no-delete'] = True
         else:
             args['bulk-delete'] = True
     elif mode == 'purge':
-        args['purge'] = ''
+        args['purge'] = True
 
     # 参数检查
     args_check_result = pt_archiver.check_args(args)
