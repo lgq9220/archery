@@ -76,10 +76,10 @@ class RedisEngine(EngineBase):
             conn = self.get_connection(db_name=db_name)
             rows = conn.execute_command(*shlex.split(sql))
             result_set.column_list = ['Result']
-            if isinstance(rows, list):
+            if isinstance(rows, list) or isinstance(rows, tuple):
                 if re.match(fr'^scan', sql.strip(), re.I):
                     keys = [[row] for row in rows[1]]
-                    keys.insert(0, rows[0])
+                    keys.insert(0, [rows[0]])
                     result_set.rows = tuple(keys)
                     result_set.affected_rows = len(rows[1])
                 else:
